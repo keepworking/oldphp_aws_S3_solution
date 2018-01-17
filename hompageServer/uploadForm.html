@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>upload sample form page</title>
+  </head>
+  <body>
+    <input onclick="getAwsImage(this)" type="text" name="" value=""> <span>이미지 링크 입력란</span>
+
+    <br><br><br><hr><br><br><br>
+
+    <div class="">
+      <form id="awsForm" action="awsUpload.php" enctype="multipart/form-data" target="awsFrame" method="post">
+	       <input id="awsFile" type="file" name="file" value="">
+      </form>
+      <iframe id="awsFrame" name="awsFrame" src="about:blank" width="" height=""></iframe>
+      <script type="text/javascript">
+      	function getAwsImage(ele) {
+          //사실 javascript 코딩 스타일은 아직도 감이 덜잡혔다. 비동기에 대해 이해가 더 잘잡힌다면 더 나은 코드가 나왓을 것을
+      		frm = document.getElementById('awsForm');
+    			frame = document.getElementById('awsFrame');
+      		frm.awsFile.onchange = function() {//새 파일 업로드 되면
+      			frame.onload = function() {
+              //예제에서는 textbox하나지만 실제로는 여럿 있어서 this 를 통해서 제어되도록 함.
+      				ele.value = frame.contentDocument.body.innerText;
+      			}
+      			frm.submit();
+      		};
+      		frm.awsFile.click();
+        }
+      </script>
+    </div>
+  </body>
+</html>
